@@ -8,7 +8,7 @@ defmodule GolixirWeb.LinkController do
   end
 
   def create(conn, %{"name" => name, "uri" => uri, "description" => description}) do
-    new_link = Link.create(name, uri, description)
+    new_link = Link.create!(name, uri, description)
     render(conn, "show.json", link: new_link)
   end
 

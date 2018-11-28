@@ -14,13 +14,15 @@ defmodule GolixirWeb.PageController do
   end
 
   def create(conn, %{"name" => name, "uri" => uri, "description" => description}) do
-    Link.create(name, uri, description)
-    redirect(conn, to: "/")
+    case Link.create(name, uri, description) do
+      {:ok, _} -> redirect(conn, to: "/")
+      {_, message} -> redirect(conn, to: "/?error=#{message}")
+    end
   end
 
   def link_redirect(conn, name, nil), do: redirect(conn, to: "/?not_found=#{name}")
 
-  def link_redirect(conn, name, link) do
+  def link_redirect(conn, _name, link) do
     Link.hit!(link)
     redirect(conn, external: link.uri)
   end

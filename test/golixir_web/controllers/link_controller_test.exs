@@ -30,7 +30,7 @@ defmodule GolixirWeb.LinkControllerTest do
   end
 
   test "SHOW /links/brex", %{conn: conn} do
-    Link.create(@name, @uri, @description)
+    Link.create!(@name, @uri, @description)
 
     conn = get(conn, "/links/brex")
 
