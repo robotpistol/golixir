@@ -20,9 +20,9 @@ defmodule Golixir.Link do
     link
     |> cast(attrs, [:name, :uri, :hits, :description])
     |> validate_required([:name, :uri, :hits, :description])
-    |> update_change(:name, &String.trim/1) 
-    |> update_change(:uri, &String.trim/1) 
-    |> update_change(:description, &String.trim/1) 
+    |> update_change(:name, &String.trim/1)
+    |> update_change(:uri, &String.trim/1)
+    |> update_change(:description, &String.trim/1)
     |> unique_constraint(:name)
     |> validate_format(:uri, ~r{^(https|http)://})
   end
