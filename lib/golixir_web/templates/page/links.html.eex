@@ -1,0 +1,40 @@
+ <div class="panel panel-default">
+  <div class="panel-heading">
+    <%= form_for @conn, "/", [class: "navbar-form"], fn f -> %>
+      <div class="row">
+        <div class="col">
+          <%= text_input f, :name, [class: "form-control", placeholder: "Alias"] %>
+        </div>
+        <div class="col">
+          <%= text_input f, :uri, [class: "form-control", placeholder: "URL", value: "https://", required: true] %>
+        </div>
+        <div class="col">
+          <%= text_input f, :description, [class: "form-control", placeholder: "Description"] %>
+        </div>
+        <%= submit "Create" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+  <thead>
+    <tr>
+      <th>Alias</th>
+      <th>URI</th>
+      <th>Description</th>
+      <th>Hits</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for link <- @links do %>
+      <tr>
+        <td><a href="/<%= link.name %>"><%= link.name %></a></td>
+        <td><a href="<%= link.uri %>"><%= link.uri %></a></td>
+        <td><%= link.description %></td>
+        <td><%= link.hits %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
