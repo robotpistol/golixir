@@ -7,6 +7,16 @@ defmodule Golixir.LinkTest do
   @uri "https://www.brex.com"
   @description "hi brex!"
 
+  test "create! twice raises error" do
+    assert Link.create!(@name, @uri, @description)
+    assert_raise Ecto.InvalidChangesetError, Link.create!(@name, @uri, @description)
+  end
+
+  test "create twice raises error" do
+    assert {:ok, _link} = Link.create(@name, @uri, @description)
+    assert {:error, message} = Link.create(@name, @uri, @description)
+  end
+
   test "search" do
     link = Link.create!(@name, @uri, @description)
     link2 = Link.create!("allen", @uri, "look it's brex!")
