@@ -1,9 +1,9 @@
 defmodule GolixirWeb.LinkControllerTest do
-  alias Golixir.{Link}
+  alias Golixir.Data.Link
   use GolixirWeb.ConnCase
 
-  @name "brex"
-  @uri "https://www.brex.com"
+  @name "google"
+  @uri "https://www.google.com"
   @description "hi"
 
   test "GET /links", %{conn: conn} do
@@ -29,10 +29,10 @@ defmodule GolixirWeb.LinkControllerTest do
            }
   end
 
-  test "SHOW /links/brex", %{conn: conn} do
+  test "SHOW /links/google", %{conn: conn} do
     Link.create!(@name, @uri, @description)
 
-    conn = get(conn, "/links/brex")
+    conn = get(conn, "/links/google")
 
     assert json_response(conn, 200) == %{
              "link" => %{

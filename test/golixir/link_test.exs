@@ -1,15 +1,15 @@
 defmodule Golixir.LinkTest do
   use Golixir.DataCase
 
-  alias Golixir.{Link}
+  alias Golixir.Data.Link
 
-  @name "brex"
-  @uri "https://www.brex.com"
-  @description "hi brex!"
+  @name "google"
+  @uri "https://www.google.com"
+  @description "Google!"
 
   test "create! twice raises error" do
     assert Link.create!(@name, @uri, @description)
-    assert_raise Ecto.InvalidChangesetError, Link.create!(@name, @uri, @description)
+    assert_raise Ecto.InvalidChangesetError, fn -> Link.create!(@name, @uri, @description) end
   end
 
   test "create twice raises error" do

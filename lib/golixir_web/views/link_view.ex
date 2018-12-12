@@ -1,6 +1,6 @@
 defmodule GolixirWeb.LinkView do
   use GolixirWeb, :view
-  alias Golixir.{Link}
+  alias Golixir.Data.Link
 
   def render("link.json", %{link: link}) do
     Link.to_map(link)

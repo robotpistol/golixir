@@ -1,6 +1,6 @@
 defmodule GolixirWeb.LinkController do
   use GolixirWeb, :controller
-  alias Golixir.{Link}
+  alias Golixir.Data.Link
 
   def index(conn, _params) do
     links = Link.find_all()

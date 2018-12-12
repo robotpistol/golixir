@@ -22,11 +22,6 @@ defmodule GolixirWeb.Router do
 
     get "/", PageController, :index
     post "/", PageController, :create
-    get "/:name", PageController, :show
+    get "/*name", PageController, :show
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", GolixirWeb do
-  #   pipe_through :api
-  # end
 end

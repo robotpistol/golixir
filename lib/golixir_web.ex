@@ -22,7 +22,6 @@ defmodule GolixirWeb do
       use Phoenix.Controller, namespace: GolixirWeb
 
       import Plug.Conn
-      import GolixirWeb.Gettext
       alias GolixirWeb.Router.Helpers, as: Routes
     end
   end
@@ -40,7 +39,6 @@ defmodule GolixirWeb do
       use Phoenix.HTML
 
       import GolixirWeb.ErrorHelpers
-      import GolixirWeb.Gettext
       alias GolixirWeb.Router.Helpers, as: Routes
     end
   end
@@ -56,7 +54,6 @@ defmodule GolixirWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import GolixirWeb.Gettext
     end
   end
 

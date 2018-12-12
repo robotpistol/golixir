@@ -1,10 +1,13 @@
-defmodule Golixir.Link do
+defmodule Golixir.Data.Link do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
 
-  alias Golixir.{Link}
-  alias Golixir.{Repo}
+  @fields [:name, :uri, :description, :hits]
+  @required_fields @fields
+
+  alias Golixir.Data.Link
+  alias Golixir.Repo
 
   schema "links" do
     field :name, :string, unique: true
@@ -16,10 +19,10 @@ defmodule Golixir.Link do
   end
 
   @doc false
-  def changeset(link, attrs) do
-    link
-    |> cast(attrs, [:name, :uri, :hits, :description])
-    |> validate_required([:name, :uri, :hits, :description])
+  def changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:name, :uri, :hits, :description])
+    |> validate_required(@required_fields)
     |> update_change(:name, &String.trim/1)
     |> update_change(:uri, &String.trim/1)
     |> update_change(:description, &String.trim/1)
@@ -29,7 +32,6 @@ defmodule Golixir.Link do
 
   def search(q) do
     Link
-    |> Ecto.Queryable.to_query()
     |> where([l], ilike(l.name, ^"%#{q}%"))
     |> or_where([l], ilike(l.description, ^"%#{q}%"))
     |> or_where([l], ilike(l.uri, ^"%#{q}%"))
@@ -49,13 +51,13 @@ defmodule Golixir.Link do
 
   def create(name, uri, description) do
     %Link{}
-    |> changeset(%{name: name, uri: uri, description: description})
+    |> Link.changeset(%{name: name, uri: uri, description: description})
     |> Repo.insert()
   end
 
   def create!(name, uri, description) do
     %Link{}
-    |> changeset(%{name: name, uri: uri, description: description})
+    |> Link.changeset(%{name: name, uri: uri, description: description})
     |> Repo.insert!()
   end
 
@@ -63,9 +65,9 @@ defmodule Golixir.Link do
     Repo.all(original, changeset)
   end
 
-  def hit!(link) do
+  def hit(link) do
     link
-    |> changeset(%{hits: link.hits + 1})
+    |> Link.changeset(%{hits: link.hits + 1})
     |> Repo.update()
   end
 
@@ -78,5 +80,3 @@ defmodule Golixir.Link do
     }
   end
 end
-
-# Golixir.Link.create("brex", "https://brex.com", "it's brex!")
