@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :golixir, GolixirWeb.Endpoint,
-  http: [port: 4003],
+  http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -68,7 +68,7 @@ config :phoenix, :plug_init_mode, :runtime
 # Configure your database
 config :golixir, Golixir.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "mysecretpassword",
   database: "golixir_dev",
-  hostname: "localhost",
+  hostname: "postgres",
   pool_size: 10

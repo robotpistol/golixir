@@ -12,7 +12,7 @@ config :golixir,
 
 # Configures the endpoint
 config :golixir, GolixirWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: nil],
   secret_key_base: "WDfl5gG43IHFlo+EM/YWuyfkg1wOxj4PXzdE5uyQGowbEKCywCDoXIEYDaRzR4C+",
   render_errors: [view: GolixirWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Golixir.PubSub, adapter: Phoenix.PubSub.PG2]

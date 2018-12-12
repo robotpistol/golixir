@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  app:
+    build: "."
+    links:
+    - postgres
+
+  postgres:
+    image: quay.io/brex/postgres:10.4
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+    - ./priv/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+
+  pgbouncer:
+    image: quay.io/brex/pgbouncer:1.7.2
+    environment:
+      PG_HOST: postgres
+      PG_USER: postgres
+      PG_PASS: postgres
+      MAX_CONN: 10000
+    links:
+    - postgres

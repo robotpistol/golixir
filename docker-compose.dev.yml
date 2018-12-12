@@ -1,0 +1,19 @@
+version: '2'
+
+volumes:
+  build_volume: {}
+  deps_volume: {}
+  mix_volume: {}
+  es_volume: {}
+
+services:
+  app:
+    volumes:
+    - .:/app:delegated
+    - build_volume:/app/_build
+    - deps_volume:/app/deps
+    - mix_volume:/root/.mix
+
+  postgres:
+    ports:
+      - "5678:5432"

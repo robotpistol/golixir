@@ -12,7 +12,7 @@ config :logger, level: :warn
 # Configure your database
 config :golixir, Golixir.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "mysecretpassword",
   database: "golixir_test",
-  hostname: "localhost",
+  hostname: "postgres",
   pool: Ecto.Adapters.SQL.Sandbox
